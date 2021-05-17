@@ -3,9 +3,13 @@
 1) Vertabanı tabloları oluşturuldu(Posgre içerisinde)
 
    -companies
+   
    -jobseekers
+   
    -positions
+   
    -system_employees
+   
    -users
    
 2) Spring initializr ile proje şablonu oluşturuldu ve proje eclipse import edildi.
