@@ -6,4 +6,5 @@ import kodlamaio.hrms.entities.concretes.Company;
 
 public interface CompanyDao extends JpaRepository<Company, Integer>{
 
+	Company getByUserId(int id);
 }

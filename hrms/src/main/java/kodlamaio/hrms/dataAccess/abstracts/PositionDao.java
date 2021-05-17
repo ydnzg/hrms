@@ -6,4 +6,5 @@ import kodlamaio.hrms.entities.concretes.Position;
 
 public interface PositionDao extends JpaRepository<Position, Integer>{
 
+	Position getById(int id);
 }

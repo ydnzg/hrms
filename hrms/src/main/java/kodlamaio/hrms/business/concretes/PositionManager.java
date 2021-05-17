@@ -27,4 +27,18 @@ public class PositionManager implements PositionService{
 		return this.positionDao.findAll();
 	}
 
+
+	@Override
+	public Position add(Position position) {
+		
+		return this.positionDao.save(position);
+	}
+
+
+	@Override
+	public Position getById(int id) {
+		
+		return this.positionDao.getById(id);
+	}
+
 }

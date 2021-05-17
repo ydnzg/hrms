@@ -27,4 +27,18 @@ public class CompanyManager implements CompanyService{
 		return this.companyDao.findAll();
 	}
 
+
+	@Override
+	public Company add(Company company) {
+		
+		return this.companyDao.save(company);
+	}
+
+
+	@Override
+	public Company getByUserId(int userId) {
+		
+		return this.companyDao.getByUserId(userId);
+	}
+
 }

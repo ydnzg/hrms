@@ -6,4 +6,5 @@ import kodlamaio.hrms.entities.concretes.SystemEmployee;
 
 public interface SystemEmployeeDao extends JpaRepository<SystemEmployee, Integer>{
 
+	SystemEmployee getByUserId(int userId);
 }

@@ -26,4 +26,16 @@ public class SystemEmployeeManager implements SystemEmployeeService{
 		return this.systemEmployeeDao.findAll();
 	}
 
+	@Override
+	public SystemEmployee add(SystemEmployee systemEmployee) {
+		
+		return this.systemEmployeeDao.save(systemEmployee);
+	}
+
+	@Override
+	public SystemEmployee getByUserId(int userId) {
+		
+		return this.systemEmployeeDao.getByUserId(userId);
+	}
+
 }

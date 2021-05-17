@@ -62,7 +62,7 @@ public class SystemEmployee {
 		return positionId;
 	}
 
-	public void setPosition(int positionId) {
+	public void setPositionId(int positionId) {
 		this.positionId = positionId;
 	}
 }
