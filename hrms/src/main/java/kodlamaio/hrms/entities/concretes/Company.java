@@ -2,44 +2,35 @@ package kodlamaio.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="companies")
-public class Company {
+@PrimaryKeyJoinColumn(name="user_id") 
+public class Company extends User{
 	
-	@Id
-	@Column(name="user_id",nullable=false)
-	private int userId;
 	
-	@Column(name="company_name",nullable=false)
+	@Column(name="company_name")
 	private String companyName;
 	
-	@Column(name="web_adress",nullable=false)
+	@Column(name="web_adress")
 	private String webAdress;
 	
-	@Column(name="phone_number",nullable=false)
+	@Column(name="phone_number")
 	private String phoneNumber;
 	
+
 	public Company() {
-		
+		super();
 	}
 
-	public Company(int userId, String companyName, String webAdress, String phoneNumber) {
+	public Company( String companyName, String webAdress, String phoneNumber) {
 		super();
-		this.userId = userId;
 		this.companyName = companyName;
 		this.webAdress = webAdress;
 		this.phoneNumber = phoneNumber;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
+		
 	}
 
 	public String getCompanyName() {
@@ -65,4 +56,6 @@ public class Company {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+
 }

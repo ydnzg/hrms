@@ -4,50 +4,46 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="jobseekers")
+@PrimaryKeyJoinColumn(name="user_id") 
 
-public class Jobseeker {
+public  class Jobseeker extends User {
 
-	@Id
-	@Column(name="user_id",nullable=false)
-	private int userId;
+
 	
-	@Column(name="first_name",nullable=false)
+	@Column(name="first_name")
 	private String firstName;
 	
-	@Column(name="last_name",nullable=false)
+	@Column(name="last_name")
 	private String lastName;
 	
-	@Column(name="identity_number",nullable=false)
+	@Column(name="identity_number")
 	private String identityNumber;
 	
-	@Column(name="birth_date",nullable=false)
+	@Column(name="birth_date")
 	private Date birthDate;
 	
 	public Jobseeker() {
-		
+		super();
 	}
 
-	public Jobseeker(int userId, String firstName, String lastName, String identityNumber, Date birthDate) {
+	
+	public Jobseeker(String firstName, String lastName, String identityNumber, Date birthDate) {
 		super();
-		this.userId = userId;
+		
+	
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.identityNumber = identityNumber;
 		this.birthDate = birthDate;
 	}
+	
 
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -77,6 +73,7 @@ public class Jobseeker {
 		return birthDate;
 	}
 
+	
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}

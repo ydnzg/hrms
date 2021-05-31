@@ -2,46 +2,33 @@ package kodlamaio.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="system_employees")
-public class SystemEmployee {
-
-	@Id
-	@Column(name="user_id",nullable=false)
-	private int userId;
+@PrimaryKeyJoinColumn(name="user_id") 
+public class SystemEmployee extends User {
 	
-	@Column(name="first_name",nullable=false)
+
+	@Column(name="first_name")
 	private String firstName;
 	
-	@Column(name="last_name",nullable=false)
+	@Column(name="last_name")
 	private String lastName;
 	
-	@Column(name="position_id",nullable=false)
-	private int positionId;
 	
 	public SystemEmployee() {
-		
+		super();
 	}
 
-	public SystemEmployee(int userId, String firstName, String lastName, int positionId) {
+	public SystemEmployee(  String firstName, String lastName) {
 		super();
-		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.positionId = positionId;
 	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -58,12 +45,6 @@ public class SystemEmployee {
 		this.lastName = lastName;
 	}
 
-	public int getPositionId() {
-		return positionId;
-	}
 
-	public void setPositionId(int positionId) {
-		this.positionId = positionId;
-	}
 }
 

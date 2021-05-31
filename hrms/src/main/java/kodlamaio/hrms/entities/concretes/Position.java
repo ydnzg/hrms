@@ -3,23 +3,26 @@ package kodlamaio.hrms.entities.concretes;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="positions")
+
+
 public class Position {
 
 	@Id
-	@GeneratedValue
-	@Column(name="id",nullable=false)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name="id")
 	private int id;
 	
-	@Column(name="name",nullable=false)
+	@Column(name="name")
 	private String name;
 	
 	public Position() {
-		
+		super();
 	}
 
 	public Position(int id, String name) {
