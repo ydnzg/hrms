@@ -2,41 +2,44 @@ package kodlamaio.hrms.entities.concretes;
 
 import java.util.List;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="positions")
+@Table(name="cities")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisement"})
-
-public class Position {
+public class City {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="position_id")
+	@Column(name="city_id")
 	private int id;
 	
-	@Column(name="name")
-	private String name;
+	@Column(name="city_name")
+	private String cityName;
 	
-	@OneToMany(mappedBy="position")
+	@OneToMany(mappedBy="city")
 	private List<JobAdvertisement> jobAdvertisements;
-	
-	public Position() {
+
+	public City() {
 		super();
 	}
 
-	public Position(int id, String name,List<JobAdvertisement> jobAdvertisements) {
+	public City(int id, String cityName,List<JobAdvertisement> jobAdvertisements) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.cityName = cityName;
 		this.jobAdvertisements=jobAdvertisements;
 	}
 
@@ -48,12 +51,14 @@ public class Position {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	
+
+	public String getCityName() {
+		return cityName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 
 	public List<JobAdvertisement> getJobAdvertisements() {
@@ -63,4 +68,8 @@ public class Position {
 	public void setJobAdvertisements(List<JobAdvertisement> jobAdvertisements) {
 		this.jobAdvertisements = jobAdvertisements;
 	}
+	
+	
+	
+	
 }

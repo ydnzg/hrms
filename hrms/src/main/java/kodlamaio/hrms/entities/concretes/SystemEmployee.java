@@ -6,8 +6,11 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 
+
+
 @Entity
 @Table(name="system_employees")
+
 @PrimaryKeyJoinColumn(name="user_id") 
 public class SystemEmployee extends User {
 	
@@ -18,6 +21,7 @@ public class SystemEmployee extends User {
 	@Column(name="last_name")
 	private String lastName;
 	
+
 	
 	public SystemEmployee() {
 		super();
@@ -27,6 +31,7 @@ public class SystemEmployee extends User {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
+		
 	}
 	
 	public String getFirstName() {
