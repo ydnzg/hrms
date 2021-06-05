@@ -33,11 +33,11 @@ public class Position {
 		super();
 	}
 
-	public Position(int id, String name,List<JobAdvertisement> jobAdvertisements) {
+	public Position(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.jobAdvertisements=jobAdvertisements;
+		//this.jobAdvertisements=jobAdvertisements;
 	}
 
 	public int getId() {
@@ -56,11 +56,11 @@ public class Position {
 		this.name = name;
 	}
 
-	public List<JobAdvertisement> getJobAdvertisements() {
-		return jobAdvertisements;
-	}
+	//public List<JobAdvertisement> getJobAdvertisements() {
+	//	return jobAdvertisements;
+	//}
 
-	public void setJobAdvertisements(List<JobAdvertisement> jobAdvertisements) {
-		this.jobAdvertisements = jobAdvertisements;
-	}
+	//public void setJobAdvertisements(List<JobAdvertisement> jobAdvertisements) {
+	//	this.jobAdvertisements = jobAdvertisements;
+	//}
 }

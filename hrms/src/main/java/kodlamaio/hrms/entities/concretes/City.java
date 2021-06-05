@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="cities")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisement"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","job_advertisements"})
 public class City {
 
 	@Id
@@ -36,11 +36,11 @@ public class City {
 		super();
 	}
 
-	public City(int id, String cityName,List<JobAdvertisement> jobAdvertisements) {
+	public City(int id, String cityName) {
 		super();
 		this.id = id;
 		this.cityName = cityName;
-		this.jobAdvertisements=jobAdvertisements;
+		//this.jobAdvertisements=jobAdvertisements;
 	}
 
 	public int getId() {
@@ -61,13 +61,13 @@ public class City {
 		this.cityName = cityName;
 	}
 
-	public List<JobAdvertisement> getJobAdvertisements() {
-		return jobAdvertisements;
-	}
+	//public List<JobAdvertisement> getJobAdvertisements() {
+	//	return jobAdvertisements;
+	//}
 
-	public void setJobAdvertisements(List<JobAdvertisement> jobAdvertisements) {
-		this.jobAdvertisements = jobAdvertisements;
-	}
+	//public void setJobAdvertisements(List<JobAdvertisement> jobAdvertisements) {
+	//	this.jobAdvertisements = jobAdvertisements;
+	//}
 	
 	
 	

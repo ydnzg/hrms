@@ -37,12 +37,12 @@ public class Company extends User{
 		super();
 	}
 
-	public Company( String companyName, String webAdress, String phoneNumber, List<JobAdvertisement> jobAdvertisements) {
+	public Company( String companyName, String webAdress, String phoneNumber) {
 		super();
 		this.companyName = companyName;
 		this.webAdress = webAdress;
 		this.phoneNumber = phoneNumber;
-		this.jobAdvertisements=jobAdvertisements;
+		//this.jobAdvertisements=jobAdvertisements;
 	}
 
 	public String getCompanyName() {
@@ -69,13 +69,13 @@ public class Company extends User{
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<JobAdvertisement> getJobAdvertisements() {
-		return jobAdvertisements;
-	}
+	//public List<JobAdvertisement> getJobAdvertisements() {
+	//	return jobAdvertisements;
+	//}
 
-	public void setJobAdvertisements(List<JobAdvertisement> jobAdvertisements) {
-		this.jobAdvertisements = jobAdvertisements;
-	}
+	//public void setJobAdvertisements(List<JobAdvertisement> jobAdvertisements) {
+	//	this.jobAdvertisements = jobAdvertisements;
+	//}
 
 
 
