@@ -7,15 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobseekerService;
+import kodlamaio.hrms.business.abstracts.ResumeEducationService;
+import kodlamaio.hrms.business.abstracts.ResumeExperienceService;
+import kodlamaio.hrms.business.abstracts.ResumeImageService;
+import kodlamaio.hrms.business.abstracts.ResumeLanguageService;
+import kodlamaio.hrms.business.abstracts.ResumeLinkService;
+import kodlamaio.hrms.business.abstracts.ResumeSkillService;
 import kodlamaio.hrms.core.abstracts.CheckEmailService;
 import kodlamaio.hrms.core.abstracts.EmailSendService;
 import kodlamaio.hrms.core.abstracts.MernisCheckService;
-
+import kodlamaio.hrms.core.utlities.results.DataResult;
 import kodlamaio.hrms.core.utlities.results.ErrorResult;
 import kodlamaio.hrms.core.utlities.results.Result;
+import kodlamaio.hrms.core.utlities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utlities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobseekerDao;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
+import kodlamaio.hrms.entities.dtos.JobSeekerResumeDto;
 
 @Service
 public class JobseekerManager implements JobseekerService{
@@ -27,15 +35,32 @@ public class JobseekerManager implements JobseekerService{
 	private List<String> emails = new ArrayList<>();
 	private List<String> identificationNumbers = new ArrayList<>();
 	
+	private ResumeEducationService educationService;
+	private ResumeImageService resumeImageService;
+	private ResumeLinkService resumeLinkService;
+	private ResumeLanguageService languageService;
+	private ResumeExperienceService jobExperienceService;
+	private ResumeSkillService resumeSkillService;
+	
 	
 	@Autowired
 	public JobseekerManager(JobseekerDao jobseekerDao, CheckEmailService checkEmailService,
-			                MernisCheckService mernisCheckService,EmailSendService emailSendService) {
+			                MernisCheckService mernisCheckService,EmailSendService emailSendService,
+			                ResumeEducationService educationService,ResumeImageService resumeImageService,
+			                ResumeLinkService resumeLinkService,ResumeLanguageService languageService,
+			                ResumeExperienceService jobExperienceService,ResumeSkillService resumeSkillService) {
 		super();
 		this.jobseekerDao = jobseekerDao;
 		this.checkEmailService=checkEmailService;
 		this.mernisCheckService=mernisCheckService;
 		this.emailSendService=emailSendService;
+		this.educationService=educationService;
+		this.resumeImageService=resumeImageService;
+		this.resumeLinkService=resumeLinkService;
+		this.languageService=languageService;
+		this.jobExperienceService=jobExperienceService;
+		this.resumeSkillService=resumeSkillService;
+		
 	}
 
 
@@ -110,6 +135,33 @@ public class JobseekerManager implements JobseekerService{
 			result = false;
 		}
 		return result;
+	}
+
+
+	@Override
+	public DataResult<Jobseeker> getByUserId(int id) {
+		return new SuccessDataResult<Jobseeker>
+		(this.jobseekerDao.getByUserId(id));
+	}
+
+
+	@Override
+	public DataResult<Jobseeker> findJobseekerByIdentityNumber(String identityNumber) {
+		return new SuccessDataResult<Jobseeker>
+		(this.jobseekerDao.findJobseekerByIdentityNumber(identityNumber));
+	}
+
+
+	@Override
+	public DataResult<JobSeekerResumeDto> getJobseekerCVById(int id) {
+		JobSeekerResumeDto resume = new JobSeekerResumeDto();
+		resume.jobExperiences = this.jobExperienceService.getAllByJobseeker_UserId(id).getData();
+		resume.languages = this.languageService.getAllByJobseeker_UserId(id).getData();
+		resume.image = this.resumeImageService.getByJobseeker_UserId(id).getData();
+		resume.resumeLinks = this.resumeLinkService.getAllByJobseeker_UserId(id).getData();
+		resume.educations = this.educationService.getAllByJobseeker_UserId(id).getData();
+		resume.resumeSkills = this.resumeSkillService.getAllByJobseeker_UserId(id).getData();
+		return new SuccessDataResult<JobSeekerResumeDto>(resume);
 	}
 	
 	

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.JobseekerService;
+import kodlamaio.hrms.core.utlities.results.DataResult;
 import kodlamaio.hrms.core.utlities.results.Result;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
+import kodlamaio.hrms.entities.dtos.JobSeekerResumeDto;
 
 @RestController
 @RequestMapping("/api/jobseekers")
@@ -39,13 +41,20 @@ public class JobseekersController {
 	@PostMapping("/register")
 	public Result register(@RequestBody Jobseeker jobseeker) {
 		return this.jobseekerService.register(jobseeker);
-		
-		
+			
 	}
+	
+	@GetMapping("/getJobseekerCVById")
+	public DataResult<JobSeekerResumeDto> getCandidateCVById(@RequestParam int id){
+		return this.jobseekerService.getJobseekerCVById(id);
+	}
+	
+	
 	//@PostMapping("/add")
 	//Result add(@RequestBody Jobseeker jobseeker) {
 	//	return this.jobseekerService.add(jobseeker);
 	//}
+	
 	
 
 }
