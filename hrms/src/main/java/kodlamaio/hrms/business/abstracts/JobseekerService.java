@@ -10,6 +10,9 @@ import kodlamaio.hrms.entities.dtos.JobSeekerResumeDto;
 public interface JobseekerService {
 
 	public Result login(String email, String password);
+	
+
+	
 	public Result register(Jobseeker jobseeker);
 	 
     public List<String> getAllEmails();

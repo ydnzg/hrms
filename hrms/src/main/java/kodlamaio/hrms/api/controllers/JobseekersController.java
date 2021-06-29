@@ -38,7 +38,11 @@ public class JobseekersController {
 	@PostMapping("/login")
 	 public Result login(@RequestParam("email") String email, @RequestParam("password") String password) {
 		return this.jobseekerService.login(email,password);
+	    
 		}
+	
+
+	
 	
 	@PostMapping("/register")
 	public Result register(@RequestBody Jobseeker jobseeker) {

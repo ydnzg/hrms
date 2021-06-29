@@ -3,6 +3,7 @@ package kodlamaio.hrms.business.concretes;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import kodlamaio.hrms.core.abstracts.CheckEmailService;
 import kodlamaio.hrms.core.abstracts.EmailSendService;
 import kodlamaio.hrms.core.abstracts.MernisCheckService;
 import kodlamaio.hrms.core.utlities.results.DataResult;
+import kodlamaio.hrms.core.utlities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utlities.results.ErrorResult;
 import kodlamaio.hrms.core.utlities.results.Result;
 import kodlamaio.hrms.core.utlities.results.SuccessDataResult;
@@ -42,13 +44,15 @@ public class JobseekerManager implements JobseekerService{
 	private ResumeExperienceService jobExperienceService;
 	private ResumeSkillService resumeSkillService;
 	
+	private ModelMapper modelMapper;
+	
 	
 	@Autowired
 	public JobseekerManager(JobseekerDao jobseekerDao, CheckEmailService checkEmailService,
 			                MernisCheckService mernisCheckService,EmailSendService emailSendService,
 			                ResumeEducationService educationService,ResumeImageService resumeImageService,
 			                ResumeLinkService resumeLinkService,ResumeLanguageService languageService,
-			                ResumeExperienceService jobExperienceService,ResumeSkillService resumeSkillService) {
+			                ResumeExperienceService jobExperienceService,ResumeSkillService resumeSkillService,ModelMapper modelMapper) {
 		super();
 		this.jobseekerDao = jobseekerDao;
 		this.checkEmailService=checkEmailService;
@@ -60,7 +64,7 @@ public class JobseekerManager implements JobseekerService{
 		this.languageService=languageService;
 		this.jobExperienceService=jobExperienceService;
 		this.resumeSkillService=resumeSkillService;
-		
+		this.modelMapper = modelMapper;
 	}
 
 
@@ -71,22 +75,39 @@ public class JobseekerManager implements JobseekerService{
 	}
 
 
+	//@Override
+	//public Result login(String email,String password) {
+	
+	//	Jobseeker jobseeker = new Jobseeker();
+		
+	//	if((jobseeker.getEmail() == email) && (jobseeker.getPassword()==password)) {
+	//	return new SuccessResult("Login successful");
+		
+	//	}
+		
+	//	else {
+	//		return   new ErrorResult("Login failed");
+	//	}	
+		
+	//}
+	
+	//30062021
 	@Override
 	public Result login(String email,String password) {
+	
 		
-		Jobseeker jobseeker = new Jobseeker();
-		
-		if((jobseeker.getEmail() == email) && (jobseeker.getPassword()==password)) {
-		return new SuccessResult("Loggin successful");
+		if((this.jobseekerDao.findJobseekerByEmailAndPassword(email, password) != null)) {
+		return new SuccessResult("Login successful");
+	
 		}
 		
 		else {
 			return   new ErrorResult("Login failed");
-		}
 			
-		
+		}	
 		
 	}
+
 
 
 	@Override
@@ -94,7 +115,10 @@ public class JobseekerManager implements JobseekerService{
 		Result result = new ErrorResult("Registration Failed");
 		
 		if(checkEmailService.mailCheck(jobseeker.getEmail()) && emailIsUsed(jobseeker.getEmail()) && 
-				identityNumberIsUsed(jobseeker.getIdentityNumber()) && mernisCheckService.checkIfRealPerson(jobseeker)){
+				identityNumberIsUsed(jobseeker.getIdentityNumber()) 
+				)
+				//&& mernisCheckService.checkIfRealPerson(jobseeker))
+		{
 			emailSendService.emailSend(jobseeker.getEmail());
 			this.jobseekerDao.save(jobseeker);
 			result = new SuccessResult("Registration Successful");
